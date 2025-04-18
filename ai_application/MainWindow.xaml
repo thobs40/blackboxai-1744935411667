@@ -1,0 +1,50 @@
+<Window x:Class="CueSheetAI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cue Sheet Autofill AI" Height="600" Width="800">
+    <Grid Margin="10">
+        <StackPanel>
+            <Button Content="Open Document (PDF or Image)" Click="OpenDocument_Click" Margin="0,0,0,10"/>
+            <TextBlock FontWeight="Bold" FontSize="16" Text="Cue Sheet Title:"/>
+            <TextBox Text="{Binding CueSheet.Title, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+            <ItemsControl ItemsSource="{Binding CueSheet.MusicEntries}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="1" Padding="8" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="Cue Title"/>
+                                <TextBox Text="{Binding CueTitle, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+
+                                <TextBlock FontWeight="Bold" Text="Contributors"/>
+                                <ItemsControl ItemsSource="{Binding Contributors}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBox Text="{Binding Name}" Width="200" Margin="0,0,10,0"/>
+                                                <TextBox Text="{Binding Role}" Width="100" Margin="0,0,10,0"/>
+                                                <TextBox Text="{Binding SplitShare}" Width="60"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock FontWeight="Bold" Text="Publishers"/>
+                                <ItemsControl ItemsSource="{Binding Publishers}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBox Text="{Binding Name}" Width="200" Margin="0,0,10,0"/>
+                                                <TextBox Text="{Binding SplitShare}" Width="60"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</Window>
